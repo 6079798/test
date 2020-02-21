@@ -1,6 +1,8 @@
 import Choices from "choices.js"
 import Vivus from "vivus"
 
+import "./form"
+
 document.querySelectorAll("[data-select]").forEach(
 	el =>
 		new Choices(el, {
