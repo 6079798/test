@@ -5,5 +5,100 @@
 {% endblock %}
 
 {% block content %}
-	Form
+	<form class="form" method="post" action="https://echo.htmlacademy.ru">
+		<div data-bcg class="form__bcg"></div>
+		<h1 class="form__title">Sign up</h1>
+		<div class="form__inner">
+			<div class="form__header">
+				<h2 class="form__text form__text--heading">New user?</h2>
+				<p class="form__text">Use the form below to create your account.</p>
+			</div>
+			<div data-animate class="form__items">
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						First Name
+						<input class="form__input" type="text" name="firstName" placeholder="John">
+					</label>
+				</div>
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						Last Name
+						<input class="form__input" type="text" name="lastName" placeholder="Doe">
+					</label>
+				</div>
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						Nationality
+						<select data-select name="nationality">
+							{% for i in ['American', 'East Timorese','Ecuadorean', 'Egyptian', 'Emirati',
+								'English', 'Equatorial', 'Guinean', 'Eritrean', 'Estonian', 'Ethiopian'] %}
+								<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select>
+					</label>
+				</div>
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						E-mail
+						<input class="form__input" type="text" name="email" placeholder="email@example.com">
+					</label>
+				</div>
+				<div class="form__item form__item--move">
+					<div class="form__label">
+						Date of Birth
+						<div class="form__select">
+							<select data-select name="day">
+								{% for i in range(1, 32) %}
+									<option value="{{ i }}">{{ i }}</option>
+								{% endfor %}
+							</select>
+							<select data-select name="month">
+								{% for i in ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
+									<option value="{{ i }}">{{ i }}</option>
+								{% endfor %}
+							</select>
+							<select data-select name="year">
+								{% for i in range(1900,2021) %}
+									<option value="{{ i }}">{{ i }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form__item form__item--move">
+					<div class="form__label">
+						Gender
+						<div class="form__radio">
+							<label class="form__label">
+								<input type="radio" name="gender" value="Male" checked>
+								<span>Male</span>
+							</label>
+							<label class="form__label">
+								<input type="radio" name="gender" value="Female">
+								<span>Female</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						Password
+						<input class="form__input form__input--password" type="password" name="password">
+					</label>
+				</div>
+				<div class="form__item form__item--move">
+					<label class="form__label">
+						Confirm Password
+						<input class="form__input form__input--password" type="password" name="passwordConf">
+					</label>
+				</div>
+			</div>
+			<div class="form__footer">
+				<p class="form__footnote">
+					Have an account? <a href="#">Login</a>
+				</p>
+				<button type="submit" class="form__submit">Complete Signup</button>
+			</div>
+		</div>
+	</form>
 {% endblock %}

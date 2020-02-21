@@ -44,8 +44,10 @@
 		"webpack-stream": "^5.2.1"
 	},
 	"dependencies": {
+		"choices.js": "^9.0.1",
 		"core-js": "3.6.4",
-		"object-fit-images": "^3.2.4"
+		"object-fit-images": "^3.2.4",
+		"vivus": "^0.4.5"
 	},
 	"browserslist": [
 		"> 1%",
