@@ -1,5 +1,14 @@
-import Choices from "choices.js"
-import Vivus from "vivus"
+import "mdn-polyfills/Element.prototype.matches"
+import "mdn-polyfills/Element.prototype.closest"
+import "mdn-polyfills/NodeList.prototype.forEach"
+import "mdn-polyfills/Array.prototype.includes"
+import "mdn-polyfills/Array.from"
+import "mdn-polyfills/Object.assign"
+import "mdn-polyfills/CustomEvent"
+import "formdata-polyfill"
+
+import Choices from "choices.js/public/assets/scripts/choices.min.js"
+import Vivus from "vivus/dist/vivus.min.js"
 
 import "./form"
 
@@ -22,7 +31,9 @@ if (firstElement) {
 		if (!target.matches(".form__item")) return
 		const next = target.nextElementSibling
 		if (next) {
-			next.classList.remove("form__item--move")
+			setTimeout(() => {
+				next.classList.remove("form__item--move")
+			}, 200)
 		} else {
 			new Vivus(bcgContainer, {
 				duration: 100,

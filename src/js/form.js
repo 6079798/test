@@ -1,4 +1,19 @@
+import toastr from "toastr"
+
 import { validateSignupForm } from "./utils/validators"
+
+toastr.options = {
+	closeButton: true,
+	newestOnTop: true,
+	showDuration: "300",
+	hideDuration: "1000",
+	extendedTimeOut: "1000",
+	showEasing: "swing",
+	hideEasing: "linear",
+	showMethod: "fadeIn",
+	hideMethod: "fadeOut",
+	timeOut: "6000",
+}
 
 const form = document.forms[0]
 
@@ -35,17 +50,44 @@ const handleKeyup = () => {
 	showFormErrors(errors, form)
 }
 
+const disableSubmitBtn = el => {
+	el.classList.add("form__submit--disabled")
+	el.setAttribute("data-original", el.textContent)
+	el.textContent = "Sending..."
+}
+
+const enableSubmitBtn = el => {
+	el.classList.remove("form__submit--disabled")
+	el.textContent = el.getAttribute("data-original")
+	el.removeAttribute("data-original")
+}
+
 const doSubmit = e => {
 	e.preventDefault()
-	const { errors, valid } = validateSignupForm(getFormData(e.target))
-	if (!valid) {
+	const { errors, valid } = validateSignupForm(getFormData(form))
+	const btn = form.querySelector(".form__submit")
+	if (valid && !btn.hasAttribute("data-original")) {
+		form.removeEventListener("keyup", handleKeyup)
+		disableSubmitBtn(btn)
+		const formData = new FormData(form)
+		const xhr = new XMLHttpRequest()
+		xhr.open(form.method, form.action)
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState !== XMLHttpRequest.DONE) return
+			if (xhr.status === 200) {
+				toastr["success"]("<h3>Thank You!</h3><p>You registered!</p>")
+				form.reset()
+				enableSubmitBtn(btn)
+			} else {
+				toastr["error"]("<h3>Error!</h3><p>Try again later!</p>")
+				enableSubmitBtn(btn)
+			}
+		}
+		xhr.send(formData)
+	} else {
 		form.classList.add("form--error")
 		showFormErrors(errors, form)
 		form.addEventListener("keyup", handleKeyup)
-	} else {
-		form.reset()
-		form.removeEventListener("keyup", handleKeyup)
-		console.log("Valid")
 	}
 }
 

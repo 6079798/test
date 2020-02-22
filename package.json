@@ -44,9 +44,12 @@
 		"webpack-stream": "^5.2.1"
 	},
 	"dependencies": {
-		"choices.js": "^9.0.1",
+		"choices.js": "7.1.0",
 		"core-js": "3.6.4",
+		"formdata-polyfill": "^3.0.19",
+		"mdn-polyfills": "^5.20.0",
 		"object-fit-images": "^3.2.4",
+		"toastr": "^2.1.4",
 		"vivus": "^0.4.5"
 	},
 	"browserslist": [
