@@ -22,14 +22,12 @@ document.querySelectorAll("[data-select]").forEach(
 )
 
 const container = document.querySelector("[data-animate]")
-const firstElement = container.querySelector(".form__item")
 const bcgContainer = document.querySelector("[data-bcg]")
 
-if (firstElement) {
-	firstElement.classList.remove("form__item--move")
-	container.addEventListener("transitionend", ({ target }) => {
-		if (!target.matches(".form__item")) return
-		const next = target.nextElementSibling
+container.addEventListener("transitionend", e => {
+	if (!e.target.matches(".form__item")) return
+	if (e.propertyName === "transform") {
+		const next = e.target.nextElementSibling
 		if (next) {
 			setTimeout(() => {
 				next.classList.remove("form__item--move")
@@ -41,5 +39,11 @@ if (firstElement) {
 				file: "/img/form-bcg.svg",
 			})
 		}
-	})
-}
+	}
+})
+
+window.addEventListener("load", () => {
+	container
+		.querySelector(".form__item--move")
+		.classList.remove("form__item--move")
+})
